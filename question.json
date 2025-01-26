@@ -79,6 +79,71 @@
     "c": "To convert a string to a number",
     "d": " To round a number to the nearest integer",
     "right_answer": "To check if a value is not a number"
+  },
+  
+  {
+    "question_n": "Which method is used to combine two or more arrays in JavaScript?",
+    "A": "join()",
+    "b": "concat()",
+    "c": "push()",
+    "d": "merge()",
+    "right_answer": "concat()"
+  },
+  {
+    "question_n": "How do you declare a constant variable in JavaScript?",
+    "A": "var constVariable",
+    "b": "constant constVariable",
+    "c": "const constVariable",
+    "d": "let constVariable",
+    "right_answer": "const constVariable"
+  },
+  {
+    "question_n": "What does the DOM stand for in JavaScript?",
+    "A": "Document Object Model",
+    "b": "Data Object Management",
+    "c": "Document Oriented Module",
+    "d": "Data Organization Model",
+    "right_answer": "Document Object Model"
+  },
+  {
+    "question_n": "Which method is used to convert a JSON string into a JavaScript object?",
+    "A": "JSON.parse()",
+    "b": "JSON.stringify()",
+    "c": "JSON.objectify()",
+    "d": "JSON.convert()",
+    "right_answer": "JSON.parse()"
+  },
+  {
+    "question_n": "What is the result of 0.1 + 0.2 === 0.3 in JavaScript?",
+    "A": "true",
+    "b": "false",
+    "c": "undefined",
+    "d": "NaN",
+    "right_answer": "false"
+  },
+  {
+    "question_n": "Which keyword is used to define a class in JavaScript?",
+    "A": "class",
+    "b": "function",
+    "c": "constructor",
+    "d": "object",
+    "right_answer": "class"
+  },
+  {
+    "question_n": "What does the 'this' keyword refer to in JavaScript?",
+    "A": "The current object",
+    "b": "The global object",
+    "c": "Depends on the execution context",
+    "d": "A specific variable",
+    "right_answer": "Depends on the execution context"
+  },
+  {
+    "question_n": "Which of the following is a valid way to declare an arrow function?",
+    "A": "() => { }",
+    "b": "function => { }",
+    "c": "() -> { }",
+    "d": "arrow() { }",
+    "right_answer": "() => { }"
   }
 ]
 
