@@ -26,10 +26,6 @@ async function FormValidation() {
   $("#btn").click(async function (e) {
     isValid = true;
     e.preventDefault();
-    if (!confirmPassword().isPasswordMatch) {
-      $(valid.messg[4]).show().text("Invalid password or password mismatch");
-      isValid = false;
-    }
 
     $("#form input").each(function (index) {
       const inputValue = $(this).val();
@@ -54,6 +50,10 @@ async function FormValidation() {
         }
       }
     });
+    if (!confirmPassword().isPasswordMatch && $("#password").val() !== "") {
+      $(valid.messg[4]).show().text("Invalid password or password mismatch");
+      isValid = false;
+    }
     if (!firstName1() && $("#first-name").val() !== "") {
       $(valid.messg[0])
         .show()
@@ -71,8 +71,7 @@ async function FormValidation() {
         .show()
         .text("Email should be in this format:Example@example.com");
     }
-
-    if (!isValid && $("#password").val() !== "") {
+    if (!isValid) {
       e.preventDefault();
       return false;
     }
