@@ -1,0 +1,85 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.col-md-5 {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+.cont {
+  background-color: #aa5486;
+  height: 100vh;
+}
+.content {
+  font-size: 64px;
+  color: white;
+  margin: 80px 0 0 65px !important;
+}
+h1 {
+  font-weight: bold;
+}
+a {
+  color: #aa5486;
+}
+p {
+  font-size: 18px;
+  font-weight: lighter;
+}
+img {
+  width: 600px;
+  height: auto;
+  max-width: 100%;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.signup {
+  font-size: 32px;
+  font-weight: 550;
+  margin-bottom: 20px;
+}
+form {
+  width: 100%;
+}
+input {
+  padding: 0 !important;
+  border: none !important;
+  border-bottom: 1px solid #a5a5a5 !important;
+  border-radius: 0% !important;
+  font-size: 16px !important;
+}
+button {
+  background-color: #aa5486 !important;
+  border: none !important;
+  margin-top: 20px !important;
+  padding: 10px !important;
+}
+.messg {
+  color: red;
+}
+.error {
+  border-bottom: 1px solid red !important;
+}
+input:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+.form-group {
+  position: relative !important;
+}
+#passicon,
+#passicon2 {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
