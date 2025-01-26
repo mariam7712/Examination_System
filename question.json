@@ -1,0 +1,83 @@
+[
+  {
+    "question": "What is the correct way to declare a JavaScript variable?",
+    "A": "let myVariable",
+    "b": "variable myVariable",
+    "c": "var = myVariable",
+    "d": " constant myVariable",
+    "right_answer": "let myVariable"
+  },
+
+  {
+    "question": " Which of the following is NOT a JavaScript data type?",
+    "A": "String",
+    "b": "Number",
+    "c": "Array",
+    "d": "Boolean",
+    "right_answer": "Array"
+  },
+  {
+    "question": "What is the output of console.log(2 + \"2\")",
+    "A": 4,
+    "b": 22,
+    "c": "NaN",
+    "d": "undefined",
+    "right_answer": 22
+  },
+  {
+    "question": " Which method is used to remove the last element from an array?",
+    "A": "pop()",
+    "b": "push() ",
+    "c": "shift()",
+    "d": "unshift()",
+    "right_answer": "pop()"
+  },
+  {
+    "question": "What will typeof null return?",
+    "A": "null",
+    "b": "undefined",
+    "c": "object",
+    "d": "number",
+    "right_answer": "object"
+  },
+  {
+    "question": "Which of the following is used to define an immediately invoked function in JavaScript?",
+    "A": "function () { }()",
+    "b": "(function () { })()",
+    "c": "(() => { })()",
+    "d": "Both b and c",
+    "right_answer": "Both b and c"
+  },
+  {
+    "question": " What is the correct syntax to write a comment in JavaScript?",
+    "A": "<!-- This is a comment -->",
+    "b": "// This is a comment",
+    "c": "/* This is a comment */",
+    "d": " Both b and c",
+    "right_answer": "Both b and c"
+  },
+  {
+    "question": "How do you call a function named myFunction in JavaScript?",
+    "A": "call myFunction",
+    "b": "myFunction()",
+    "c": "call function myFunction()",
+    "d": "myFunction",
+    "right_answer": "myFunction()"
+  },
+  {
+    "question": "Which of the following statements is true about const?",
+    "A": "const variables cannot be reassigned",
+    "b": "const variables can only hold string values",
+    "c": "const variables are block-scoped",
+    "d": "Both a and c",
+    "right_answer": "Both a and c"
+  },
+  {
+    "question": "What is the purpose of the isNaN() function in JavaScript?",
+    "A": "To check if a value is null",
+    "b": "To check if a value is not a number",
+    "c": "To convert a string to a number",
+    "d": " To round a number to the nearest integer",
+    "right_answer": "To check if a value is not a number"
+  }
+]
