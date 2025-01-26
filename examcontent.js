@@ -18,6 +18,7 @@ function time_remaining(endtime) {
     seconds: seconds,
   };
 }
+
 function run_clock(id, endtime) {
   let clock = document.getElementById(id);
   function update_clock() {
@@ -32,8 +33,12 @@ function run_clock(id, endtime) {
   var timeinterval = setInterval(update_clock, 1000);
 }
 
+// Start the timer immediately when the page loads
 run_clock("clockdiv", deadline);
+
 //////////////////////////////
+// run_clock("clockdiv", deadline);
+// /////////////////////////////////////////////////////
 var qc = document.getElementById("qc");
 let btn1 = document.getElementById("btn1");
 let btn2 = document.getElementById("btn2");
@@ -57,46 +62,17 @@ fetch("question.json")
     return response.json();
   })
   .then((data) => {
-    // Remove duplicates based on 'question_n'
-   const uniqueQuestions = [
-     ...new Map(data.map((item) => [item.question_n, item])).values(),
-   ];
-
-
-    // Shuffle the unique questions
-    const shuffledQuestions = uniqueQuestions.sort(() => Math.random() - 0.5);
-
-    // Select the first 10 questions
-    const selectedQuestions = shuffledQuestions.slice(0, 10);
-
-    // Create the final question object
-    const questionObject = {};
-    selectedQuestions.forEach((question, index) => {
-      questionObject[`question_${index + 1}`] = {
-        question: question.question_n,
-        options: {
-          A: question.A,
-          b: question.b,
-          c: question.c,
-          d: question.d,
-        },
-        right_answer: question.right_answer,
-      };
-    });
-
-    console.log(questionObject);
-    const firstQuestion = questionObject["question_1"];
-
-    qc.innerText = firstQuestion.question;
-    option1.innerText = firstQuestion.options.A;
-    option2.innerText = firstQuestion.options.b;
-    option3.innerText = firstQuestion.options.c;
-    option4.innerText = firstQuestion.options.d;
+    qc.innerText = data[0].question_n;
+    option1.innerText = data[0].A;
+    option2.innerText = data[0].b;
+    option3.innerText = data[0].c;
+    option4.innerText = data[0].d;
     var arr2 = [option1, option2, option3, option4];
     let user_answer = new Array(10);
     let Exam_answer = new Array(10);
     for (let i = 0; i < 10; i++) {
-      Exam_answer[i] = questionObject[`question_${i + 1}`].right_answer;
+      ///////////////////server///////////////////////////
+      Exam_answer[i] = data[i].right_answer;
     }
     console.log("serverrrr");
     console.log(Exam_answer);
@@ -112,11 +88,11 @@ fetch("question.json")
 
           Flg_answer = 1;
 
-          user_answer[ques_curr - 1] = answer;
+          user_answer[ques_curr - 1] = answer; // Assuming you are storing it in the first index for now
         } else {
           arr2[i].style.backgroundColor = "white";
           Flg_answer = 0;
-          user_answer[ques_curr - 1] = null;
+          user_answer[ques_curr - 1] = null; // Reset the user's answer
         }
 
         console.log("User's answer: ", user_answer[ques_curr - 1]);
@@ -137,6 +113,8 @@ fetch("question.json")
       Array.from(buttonq).forEach((button) => {
         if (current + 1 == button.innerText) {
           console.log(`Button ${button.innerText} clicked`);
+          ///////importanttttttttttttttttttttttttttttttt///
+
           qnum.innerText = ` Question ${button.innerText} out of 10`;
           var newdiv = document.createElement("div");
           newdiv.innerHTML =
@@ -169,12 +147,16 @@ fetch("question.json")
             '<div class="option4">' + data[button.innerText - 1].d + "</div>";
           option4.innerText = "";
           option4.appendChild(newdiv4);
+          ////////////////important////////////////////
 
           button.style.backgroundColor = "rgba(170, 84, 134, 1)";
           button.disabled = false;
           button.classList.remove("disabled");
           arr[current] = 1;
           console.log(arr);
+
+          /////xxxxxxxxxxxxxxxxxxxxxxxxxxxx///////////////////////
+          //////////////////////////
         }
       });
     });
@@ -220,7 +202,6 @@ fetch("question.json")
         }
       });
     });
-
     ////////////////////// circle /buttons //////////////////////
 
     const buttonsDiv = document.getElementById("buttons");
@@ -236,6 +217,7 @@ fetch("question.json")
       Flg_answer = 0;
       $(btn1).prop("disabled", false).removeClass("disabled");
 
+      // Check if the current button is flagged
       if (current + 1 < allButtons.length) {
         const currentButton = allButtons[current + 1]; // Get the current button
         if (
@@ -246,6 +228,7 @@ fetch("question.json")
         }
       }
 
+      // Your existing code for handling questions
       if (current <= 9) {
         console.log(`Button ${current + 1}:`, allButtons[current]); // Log each button
 
@@ -258,46 +241,35 @@ fetch("question.json")
         console.log("Data fetched:", data[current]);
         if (current <= 8 && current != 9) {
           console.log(",,,," + (current + 1));
-
-          console.log(questionObject[`question_${current + 1}`].question);
+          console.log(data[current + 1].question_n);
 
           var newdiv = document.createElement("div");
           newdiv.innerHTML =
-            '<div class="ques_name">' +
-            questionObject[`question_${current + 1}`].question +
-            "</div>";
+            '<div class="ques_name">' + data[current + 1].question_n + "</div>";
           qc.innerText = "";
           qc.appendChild(newdiv);
 
           var newdiv1 = document.createElement("div");
           newdiv1.innerHTML =
-            '<div class="option1">' +
-            questionObject[`question_${current + 1}`].options.A +
-            "</div>";
+            '<div class="option1">' + data[current + 1].A + "</div>";
           option1.innerText = "";
           option1.appendChild(newdiv1);
 
           var newdiv2 = document.createElement("div");
           newdiv2.innerHTML =
-            '<div class="option2">' +
-            questionObject[`question_${current + 1}`].options.b +
-            "</div>";
+            '<div class="option2">' + data[current + 1].b + "</div>";
           option2.innerText = "";
           option2.appendChild(newdiv2);
 
           var newdiv3 = document.createElement("div");
           newdiv3.innerHTML =
-            '<div class="option3">' +
-            questionObject[`question_${current + 1}`].options.c +
-            "</div>";
+            '<div class="option3">' + data[current + 1].c + "</div>";
           option3.innerText = "";
           option3.appendChild(newdiv3);
 
           var newdiv4 = document.createElement("div");
           newdiv4.innerHTML =
-            '<div class="option4">' +
-            questionObject[`question_${current + 1}`].options.d +
-            "</div>";
+            '<div class="option4">' + data[current + 1].d + "</div>";
           option4.innerText = "";
           option4.appendChild(newdiv4);
 
@@ -308,54 +280,44 @@ fetch("question.json")
 
           var newdiv = document.createElement("div");
           newdiv.innerHTML =
-            '<div class="ques_name">' +
-            questionObject[`question_${current}`].question +
-            "</div>";
+            '<div class="ques_name">' + data[current].question_n + "</div>";
           qc.innerText = "";
           qc.appendChild(newdiv);
 
           var newdiv1 = document.createElement("div");
           newdiv1.innerHTML =
-            '<div class="option1">' +
-            questionObject[`question_${current}`].options.A +
-            "</div>";
+            '<div class="option1">' + data[current].A + "</div>";
           option1.innerText = "";
           option1.appendChild(newdiv1);
 
           var newdiv2 = document.createElement("div");
           newdiv2.innerHTML =
-            '<div class="option2">' +
-            questionObject[`question_${current}`].options.b +
-            "</div>";
+            '<div class="option2">' + data[current].b + "</div>";
           option2.innerText = "";
           option2.appendChild(newdiv2);
 
           var newdiv3 = document.createElement("div");
           newdiv3.innerHTML =
-            '<div class="option3">' +
-            questionObject[`question_${current}`].options.c +
-            "</div>";
+            '<div class="option3">' + data[current].c + "</div>";
           option3.innerText = "";
           option3.appendChild(newdiv3);
 
           var newdiv4 = document.createElement("div");
           newdiv4.innerHTML =
-            '<div class="option4">' +
-            questionObject[`question_${current}`].options.d +
-            "</div>";
+            '<div class="option4">' + data[current].d + "</div>";
           option4.innerText = "";
           option4.appendChild(newdiv4);
 
           btn2.innerText = "Finish Exam";
 
           console.log("mxxx");
-
+          ///////////////////resultttttttttttt////////////////
           console.log(current);
-          console.log(questionObject.length);
+          console.log(data.length);
           console.log("------");
 
           btn2.addEventListener("click", () => {
-            if (current + 1 === questionObject.length) {
+            if (current + 1 === data.length) {
               let grade = 0;
               for (let i = 0; i <= Exam_answer.length + 1; i++) {
                 if (Exam_answer[i] === user_answer[i]) {
@@ -371,33 +333,34 @@ fetch("question.json")
     });
 
     // ////////////***************previous******************************** */
-    let isClicked = false;
+    let isClicked = false; // Initialize the flag at the top
 
     btn1.addEventListener("click", () => {
       if (ques_curr === 2 || ques_curr === 1) {
         if (!isClicked || current - 1 == 0) {
-          isClicked = true;
-          $(btn1).prop("disabled", true).addClass("disabled");
+          isClicked = true; // Update the flag to indicate the button was clicked
+          $(btn1).prop("disabled", true).addClass("disabled"); // Disable the button
           console.log("Button disabled because this is the first question.");
         }
       }
 
+      // Reset options and styles
       option1.style.backgroundColor = "white";
       option2.style.backgroundColor = "white";
       option3.style.backgroundColor = "white";
       option4.style.backgroundColor = "white";
       Flg_answer = 0;
 
-      flag.style.backgroundColor = "rgb(187, 184, 184)";
+      flag.style.backgroundColor = "rgb(187, 184, 184)"; // Default flag icon color
       flagg.style.color = "rgb(255, 255, 255)";
 
       if (current < allButtons.length) {
-        const currentButton = allButtons[current - 1];
+        const currentButton = allButtons[current - 1]; // Get the current button
         if (
           currentButton.style.backgroundColor === "rgba(170, 84, 134, 1)" ||
           currentButton.style.backgroundColor === "rgb(170, 84, 134)"
         ) {
-          flag.style.backgroundColor = "rgba(170, 84, 134, 1)";
+          flag.style.backgroundColor = "rgba(170, 84, 134, 1)"; // Update the flag icon color
         }
       }
 
@@ -405,7 +368,7 @@ fetch("question.json")
       console.log("currr" + current);
 
       if (current > 0) {
-        console.log(`Button ${current - 1}:`, allButtons[current - 1]);
+        console.log(`Button ${current - 1}:`, allButtons[current - 1]); // Log each button
 
         let qnum = document.getElementById("qnum");
         qnum.innerText = "";
@@ -414,47 +377,38 @@ fetch("question.json")
           ques_curr = ques_curr - 1;
           qnum.innerText = ` Question ${ques_curr} out of 10`;
 
-          console.log("Data fetched:" + questionObject[`question_${current}`]);
+          console.log("Data fetched:", data[current]);
           console.log(",,,," + (current - 1));
-          console.log(questionObject[`question_${current - 1}`].question);
+          console.log(data[current - 1].question_n);
 
+          // Populate new question
           var newdiv = document.createElement("div");
           newdiv.innerHTML =
-            '<div class="ques_name">' +
-            questionObject[`question_${current - 1}`].question +
-            "</div>";
+            '<div class="ques_name">' + data[current - 1].question_n + "</div>";
           qc.innerText = "";
           qc.appendChild(newdiv);
 
           var newdiv1 = document.createElement("div");
           newdiv1.innerHTML =
-            '<div class="option1">' +
-            questionObject[`question_${current - 1}`].options.A +
-            "</div>";
+            '<div class="option1">' + data[current - 1].A + "</div>";
           option1.innerText = "";
           option1.appendChild(newdiv1);
 
           var newdiv2 = document.createElement("div");
           newdiv2.innerHTML =
-            '<div class="option2">' +
-            questionObject[`question_${current - 1}`].options.b +
-            "</div>";
+            '<div class="option2">' + data[current - 1].b + "</div>";
           option2.innerText = "";
           option2.appendChild(newdiv2);
 
           var newdiv3 = document.createElement("div");
           newdiv3.innerHTML =
-            '<div class="option3">' +
-            questionObject[`question_${current - 1}`].options.c +
-            "</div>";
+            '<div class="option3">' + data[current - 1].c + "</div>";
           option3.innerText = "";
           option3.appendChild(newdiv3);
 
           var newdiv4 = document.createElement("div");
           newdiv4.innerHTML =
-            '<div class="option4">' +
-            questionObject[`question_${current - 1}`].options.d +
-            "</div>";
+            '<div class="option4">' + data[current - 1].d + "</div>";
           option4.innerText = "";
           option4.appendChild(newdiv4);
 
@@ -468,3 +422,4 @@ fetch("question.json")
   });
 //
 ////////////////////////////////////////////////////////
+
