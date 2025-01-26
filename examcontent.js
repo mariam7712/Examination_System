@@ -53,7 +53,7 @@ let option4 = document.getElementById("option4");
 let answer;
 let Flg_answer = 0;
 $(btn1).prop("disabled", true).addClass("disabled"); // Disable the button
-
+let ex = new Set();
 fetch("question.json")
   .then((response) => {
     if (!response.ok) {
@@ -62,17 +62,32 @@ fetch("question.json")
     return response.json();
   })
   .then((data) => {
-    qc.innerText = data[0].question_n;
-    option1.innerText = data[0].A;
-    option2.innerText = data[0].b;
-    option3.innerText = data[0].c;
-    option4.innerText = data[0].d;
+    do {
+      let index = Math.floor(Math.random() * data.length);
+      ex.add(data[index]);
+      // console.log(data[index]);
+    } while (ex.size < 10);
+    // console.log("Final Set:", ex);
+    const exArray = Array.from(ex);
+    // for (let i = 0; i < 10; i++) {
+    //   console.log(`Question ${i + 1}:`, exArray[i].question);
+    //   console.log(exArray[i].A);
+    //   console.log(exArray[i].b);
+    //   console.log(exArray[i].c);
+    //   console.log(exArray[i].d);
+    //   console.log(exArray[i].right_answer);
+    // }
+    qc.innerText = exArray[0].question_n;
+    option1.innerText = exArray[0].A;
+    option2.innerText = exArray[0].b;
+    option3.innerText = exArray[0].c;
+    option4.innerText = exArray[0].d;
     var arr2 = [option1, option2, option3, option4];
     let user_answer = new Array(10);
     let Exam_answer = new Array(10);
     for (let i = 0; i < 10; i++) {
       ///////////////////server///////////////////////////
-      Exam_answer[i] = data[i].right_answer;
+      Exam_answer[i] = exArray[i].right_answer;
     }
     console.log("serverrrr");
     console.log(Exam_answer);
@@ -119,32 +134,39 @@ fetch("question.json")
           var newdiv = document.createElement("div");
           newdiv.innerHTML =
             '<div class="ques_name">' +
-            data[button.innerText - 1].question_n +
+            exArray[button.innerText - 1].question_n +
             "</div>";
           qc.innerText = "";
           qc.appendChild(newdiv);
-
           var newdiv1 = document.createElement("div");
           newdiv1.innerHTML =
-            '<div class="option1">' + data[button.innerText - 1].A + "</div>";
+            '<div class="option1">' +
+            exArray[button.innerText - 1].A +
+            "</div>";
           option1.innerText = "";
           option1.appendChild(newdiv1);
 
           var newdiv2 = document.createElement("div");
           newdiv2.innerHTML =
-            '<div class="option2">' + data[button.innerText - 1].b + "</div>";
+            '<div class="option2">' +
+            exArray[button.innerText - 1].b +
+            "</div>";
           option2.innerText = "";
           option2.appendChild(newdiv2);
 
           var newdiv3 = document.createElement("div");
           newdiv3.innerHTML =
-            '<div class="option3">' + data[button.innerText - 1].c + "</div>";
+            '<div class="option3">' +
+            exArray[button.innerText - 1].c +
+            "</div>";
           option3.innerText = "";
           option3.appendChild(newdiv3);
 
           var newdiv4 = document.createElement("div");
           newdiv4.innerHTML =
-            '<div class="option4">' + data[button.innerText - 1].d + "</div>";
+            '<div class="option4">' +
+            exArray[button.innerText - 1].d +
+            "</div>";
           option4.innerText = "";
           option4.appendChild(newdiv4);
           ////////////////important////////////////////
@@ -171,32 +193,40 @@ fetch("question.json")
           var newdiv = document.createElement("div");
           newdiv.innerHTML =
             '<div class="ques_name">' +
-            data[button.innerText - 1].question_n +
+            exArray[button.innerText - 1].question_n +
             "</div>";
           qc.innerText = "";
           qc.appendChild(newdiv);
 
           var newdiv1 = document.createElement("div");
           newdiv1.innerHTML =
-            '<div class="option1">' + data[button.innerText - 1].A + "</div>";
+            '<div class="option1">' +
+            exArray[button.innerText - 1].A +
+            "</div>";
           option1.innerText = "";
           option1.appendChild(newdiv1);
 
           var newdiv2 = document.createElement("div");
           newdiv2.innerHTML =
-            '<div class="option2">' + data[button.innerText - 1].b + "</div>";
+            '<div class="option2">' +
+            exArray[button.innerText - 1].b +
+            "</div>";
           option2.innerText = "";
           option2.appendChild(newdiv2);
 
           var newdiv3 = document.createElement("div");
           newdiv3.innerHTML =
-            '<div class="option3">' + data[button.innerText - 1].c + "</div>";
+            '<div class="option3">' +
+            exArray[button.innerText - 1].c +
+            "</div>";
           option3.innerText = "";
           option3.appendChild(newdiv3);
 
           var newdiv4 = document.createElement("div");
           newdiv4.innerHTML =
-            '<div class="option4">' + data[button.innerText - 1].d + "</div>";
+            '<div class="option4">' +
+            exArray[button.innerText - 1].d +
+            "</div>";
           option4.innerText = "";
           option4.appendChild(newdiv4);
         }
@@ -238,38 +268,40 @@ fetch("question.json")
           qnum.innerText = ` Question ${ques_curr} out of 10`;
         }
 
-        console.log("Data fetched:", data[current]);
+        console.log("Data fetched:", exArray[current]);
         if (current <= 8 && current != 9) {
           console.log(",,,," + (current + 1));
-          console.log(data[current + 1].question_n);
+          console.log(exArray[current + 1].question_n);
 
           var newdiv = document.createElement("div");
           newdiv.innerHTML =
-            '<div class="ques_name">' + data[current + 1].question_n + "</div>";
+            '<div class="ques_name">' +
+            exArray[current + 1].question_n +
+            "</div>";
           qc.innerText = "";
           qc.appendChild(newdiv);
 
           var newdiv1 = document.createElement("div");
           newdiv1.innerHTML =
-            '<div class="option1">' + data[current + 1].A + "</div>";
+            '<div class="option1">' + exArray[current + 1].A + "</div>";
           option1.innerText = "";
           option1.appendChild(newdiv1);
 
           var newdiv2 = document.createElement("div");
           newdiv2.innerHTML =
-            '<div class="option2">' + data[current + 1].b + "</div>";
+            '<div class="option2">' + exArray[current + 1].b + "</div>";
           option2.innerText = "";
           option2.appendChild(newdiv2);
 
           var newdiv3 = document.createElement("div");
           newdiv3.innerHTML =
-            '<div class="option3">' + data[current + 1].c + "</div>";
+            '<div class="option3">' + exArray[current + 1].c + "</div>";
           option3.innerText = "";
           option3.appendChild(newdiv3);
 
           var newdiv4 = document.createElement("div");
           newdiv4.innerHTML =
-            '<div class="option4">' + data[current + 1].d + "</div>";
+            '<div class="option4">' + exArray[current + 1].d + "</div>";
           option4.innerText = "";
           option4.appendChild(newdiv4);
 
@@ -280,31 +312,31 @@ fetch("question.json")
 
           var newdiv = document.createElement("div");
           newdiv.innerHTML =
-            '<div class="ques_name">' + data[current].question_n + "</div>";
+            '<div class="ques_name">' + exArray[current].question_n + "</div>";
           qc.innerText = "";
           qc.appendChild(newdiv);
 
           var newdiv1 = document.createElement("div");
           newdiv1.innerHTML =
-            '<div class="option1">' + data[current].A + "</div>";
+            '<div class="option1">' + exArray[current].A + "</div>";
           option1.innerText = "";
           option1.appendChild(newdiv1);
 
           var newdiv2 = document.createElement("div");
           newdiv2.innerHTML =
-            '<div class="option2">' + data[current].b + "</div>";
+            '<div class="option2">' + exArray[current].b + "</div>";
           option2.innerText = "";
           option2.appendChild(newdiv2);
 
           var newdiv3 = document.createElement("div");
           newdiv3.innerHTML =
-            '<div class="option3">' + data[current].c + "</div>";
+            '<div class="option3">' + exArray[current].c + "</div>";
           option3.innerText = "";
           option3.appendChild(newdiv3);
 
           var newdiv4 = document.createElement("div");
           newdiv4.innerHTML =
-            '<div class="option4">' + data[current].d + "</div>";
+            '<div class="option4">' + exArray[current].d + "</div>";
           option4.innerText = "";
           option4.appendChild(newdiv4);
 
@@ -317,11 +349,12 @@ fetch("question.json")
           console.log("------");
 
           btn2.addEventListener("click", () => {
-            if (current + 1 === data.length) {
+            if (current + 1 === exArray.length) {
               let grade = 0;
               for (let i = 0; i <= Exam_answer.length + 1; i++) {
                 if (Exam_answer[i] === user_answer[i]) {
                   grade++;
+                  console.log(Exam_answer[i]);
                   console.log("welldone" + grade);
                 }
               }
@@ -377,38 +410,40 @@ fetch("question.json")
           ques_curr = ques_curr - 1;
           qnum.innerText = ` Question ${ques_curr} out of 10`;
 
-          console.log("Data fetched:", data[current]);
+          console.log("Data fetched:", exArray[current]);
           console.log(",,,," + (current - 1));
-          console.log(data[current - 1].question_n);
+          console.log(exArray[current - 1].question_n);
 
           // Populate new question
           var newdiv = document.createElement("div");
           newdiv.innerHTML =
-            '<div class="ques_name">' + data[current - 1].question_n + "</div>";
+            '<div class="ques_name">' +
+            exArray[current - 1].question_n +
+            "</div>";
           qc.innerText = "";
           qc.appendChild(newdiv);
 
           var newdiv1 = document.createElement("div");
           newdiv1.innerHTML =
-            '<div class="option1">' + data[current - 1].A + "</div>";
+            '<div class="option1">' + exArray[current - 1].A + "</div>";
           option1.innerText = "";
           option1.appendChild(newdiv1);
 
           var newdiv2 = document.createElement("div");
           newdiv2.innerHTML =
-            '<div class="option2">' + data[current - 1].b + "</div>";
+            '<div class="option2">' + exArray[current - 1].b + "</div>";
           option2.innerText = "";
           option2.appendChild(newdiv2);
 
           var newdiv3 = document.createElement("div");
           newdiv3.innerHTML =
-            '<div class="option3">' + data[current - 1].c + "</div>";
+            '<div class="option3">' + exArray[current - 1].c + "</div>";
           option3.innerText = "";
           option3.appendChild(newdiv3);
 
           var newdiv4 = document.createElement("div");
           newdiv4.innerHTML =
-            '<div class="option4">' + data[current - 1].d + "</div>";
+            '<div class="option4">' + exArray[current - 1].d + "</div>";
           option4.innerText = "";
           option4.appendChild(newdiv4);
 
@@ -422,4 +457,3 @@ fetch("question.json")
   });
 //
 ////////////////////////////////////////////////////////
-
