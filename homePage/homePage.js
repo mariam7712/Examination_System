@@ -3,5 +3,7 @@ $("#btn1").click(function () {
 });
 $("#btn2").click(function () {
   window.location.replace("../Registration/signup.html");
-  localStorage.removeItem("firstName");
+  // localStorage.removeItem("firstName");
+  // localStorage.removeItem("finalgrade");
+  localStorage.clear();
 });

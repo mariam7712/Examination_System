@@ -1,4 +1,8 @@
 import { displaypass } from "./validations.js";
+import { preventBack } from "../history.js";
+
+// Use the preventBack function as needed
+preventBack();
 
 function LoginValidation() {
   const pass = displaypass("#passicon", 1);

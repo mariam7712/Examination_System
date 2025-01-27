@@ -143,8 +143,4 @@ async function FormValidation() {
   });
 }
 
-// if (document.readyState === "loading") {
-// document.addEventListener("DOMContentLoaded", FormValidation);
-// } else {
 FormValidation();
-// }
