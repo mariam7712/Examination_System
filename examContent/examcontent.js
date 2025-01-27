@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////
 // 10 minutes from now
-var time_in_minutes = .5;
+var time_in_minutes = 0.1;
 var current_time = Date.parse(new Date());
 var deadline = new Date(current_time + time_in_minutes * 60 * 1000);
 
@@ -26,7 +26,7 @@ function run_clock(id, endtime) {
     clock.innerHTML = "minutes: " + t.minutes + "  seconds: " + t.seconds;
     if (t.total <= 0) {
       clearInterval(timeinterval);
-      window.location.href = "time.html";
+      window.location.href = "../timeOff/time.html";
     }
   }
   update_clock(); // run function once at first to avoid delay
