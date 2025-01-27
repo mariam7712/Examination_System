@@ -114,24 +114,23 @@ async function FormValidation() {
         console.log("Attempting redirection...");
 
         try {
-          window.location.href = "../start_exam.html";
+          window.location.href = "../startExam/start_exam.html";
 
           setTimeout(() => {
             if (window.location.href.indexOf("start_exam.html") === -1) {
-              console.log("Trying alternative redirection method...");
-              window.location.replace("../start_exam.html");
+              window.location.replace("../startExam/start_exam.html");
             }
           }, 100);
           setTimeout(() => {
             if (window.location.href.indexOf("start_exam.html") === -1) {
               console.log("Trying alternative redirection method...");
-              window.location.replace("../start_exam.html");
+              window.location.replace("../startExam/start_exam.html");
             }
           }, 200);
         } catch (redirectError) {
           console.error("Redirection error:", redirectError);
           const link = document.createElement("a");
-          link.href = "../start_exam.html";
+          link.href = "../startExam/start_exam.html";
           document.body.appendChild(link);
           link.click();
         }
@@ -144,8 +143,8 @@ async function FormValidation() {
   });
 }
 
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", FormValidation);
-} else {
-  FormValidation();
-}
+// if (document.readyState === "loading") {
+// document.addEventListener("DOMContentLoaded", FormValidation);
+// } else {
+FormValidation();
+// }

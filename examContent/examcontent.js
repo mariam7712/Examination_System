@@ -56,7 +56,7 @@ let answer;
 let Flg_answer = 0;
 $(btn1).prop("disabled", true).addClass("disabled"); // Disable the button
 let ex = new Set();
-fetch("question.json")
+fetch("../database/question.json")
   .then((response) => {
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
@@ -428,16 +428,9 @@ fetch("question.json")
               finalgrade = grade * 10;
               window.localStorage.setItem("finalgrade", finalgrade.toString());
               if (finalgrade >= 60) {
-                console.log(
-                  "congratulations you passd exam , you scored is",
-                  `${finalgrade}%`
-                );
-                window.location.href = "result.html";
+                window.location.href = "../succed/result.html";
               } else {
-                console.log(
-                  `It’s okay, Ali.You scored ${finalgrade}%  . Try again for a better result!`
-                );
-                window.location.href = "fail.html";
+                window.location.href = "../fail/fail.html";
               }
             }
           });

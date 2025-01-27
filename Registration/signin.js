@@ -27,7 +27,7 @@ function LoginValidation() {
         });
         if (matchusers) {
           localStorage.setItem("firstName", matchusers.firstName);
-          window.location.replace("../start_exam.html");
+          window.location.replace("../startExam/start_exam.html");
         } else {
           $(".messg").show().text("Invalid email or password");
         }
