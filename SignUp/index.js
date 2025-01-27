@@ -218,6 +218,7 @@ async function FormValidation() {
       email: $("#email").val(),
       password: passwordvalue, // Real password value
     };
+    localStorage.setItem("firstName", userData.firstName);
 
     console.log("User data prepared for sending:", userData);
 
