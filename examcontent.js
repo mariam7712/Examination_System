@@ -213,74 +213,62 @@ fetch("question.json")
 
     Array.from(buttonq).forEach((button) => {
       button.addEventListener("click", () => {
+        current = button.innerText - 1; 
+
         flag.style.backgroundColor = "rgba(170, 84, 134, 1)";
-        if (arr[button.innerText - 1] == 1) {
+
+        if (arr[current] == 1) {
           console.log(`Button ${button.innerText} clicked`);
-          qnum.innerText = "";
-          qnum.innerText = ` Question ${button.innerText} out of 10`;
+          qnum.innerText = `Question ${button.innerText} out of 10`;
+
           var newdiv = document.createElement("div");
           newdiv.innerHTML =
-            '<div class="ques_name">' +
-            exArray[button.innerText - 1].question_n +
-            "</div>";
+            '<div class="ques_name">' + exArray[current].question_n + "</div>";
           qc.innerText = "";
           qc.appendChild(newdiv);
 
-          var newdiv1 = document.createElement("div");
-          newdiv1.innerHTML =
-            '<div class="option1">' +
-            exArray[button.innerText - 1].A +
-            "</div>";
-          option1.innerText = "";
-          option1.appendChild(newdiv1);
+          var options = [
+            exArray[current].A,
+            exArray[current].b,
+            exArray[current].c,
+            exArray[current].d,
+          ];
+          var optionElements = [option1, option2, option3, option4];
 
-          var newdiv2 = document.createElement("div");
-          newdiv2.innerHTML =
-            '<div class="option2">' +
-            exArray[button.innerText - 1].b +
-            "</div>";
-          option2.innerText = "";
-          option2.appendChild(newdiv2);
+          // Populate the options
+          options.forEach((optionText, index) => {
+            var newOptionDiv = document.createElement("div");
+            newOptionDiv.innerHTML = `<div class="option">${optionText}</div>`;
+            optionElements[index].innerText = ""; // Clear previous content
+            optionElements[index].appendChild(newOptionDiv);
+          });
 
-          var newdiv3 = document.createElement("div");
-          newdiv3.innerHTML =
-            '<div class="option3">' +
-            exArray[button.innerText - 1].c +
-            "</div>";
-          option3.innerText = "";
-          option3.appendChild(newdiv3);
+          optionElements.forEach((optionElement) => {
+            optionElement.style.backgroundColor = "white";
+          });
 
-          var newdiv4 = document.createElement("div");
-          newdiv4.innerHTML =
-            '<div class="option4">' +
-            exArray[button.innerText - 1].d +
-            "</div>";
-          option4.innerText = "";
-          option4.appendChild(newdiv4);
-          ///////////mariomaaaaaaaaaaaaaaaa///////////////////////////
-          for (let i = 0; i < 4; i++) {
-            arr2[i].style.backgroundColor = "white";
-          }
-          for (let i = 0; i < user_answer.length; i++) {
-            if (i == current && user_answer[current]) {
-              console.log("banseh");
-              console.log(user_answer[current]);
-              for (let i = 0; i < 4; i++) {
-                if (option1.innerText == user_answer[current]) {
-                  option1.style.backgroundColor = "green";
-                } else if (option2.innerText == user_answer[current]) {
-                  option2.style.backgroundColor = "green";
-                } else if (option3.innerText == user_answer[current]) {
-                  option3.style.backgroundColor = "green";
-                } else if (option4.innerText == user_answer[current]) {
-                  option4.style.backgroundColor = "green";
-                }
+          if (user_answer[current]) {
+            optionElements.forEach((optionElement, index) => {
+              if (
+                optionElement.innerText.trim() === user_answer[current].trim()
+              ) {
+                optionElement.style.backgroundColor = "green"; // Correct answer
+              } else {
+                optionElement.style.backgroundColor = "white"; // Incorrect answer
               }
-            }
+            });
           }
+          console.log(" noooooooooooooooooooooo");
+          // console.log(ques_curr);
+          // console.log(button.innerText);
+          ques_curr = button.innerText;
+          ques_curr = parseInt(ques_curr);
+
+          console.log("user_answer:", user_answer);
         }
       });
     });
+
     ////////////////////// circle /buttons //////////////////////
 
     const buttonsDiv = document.getElementById("buttons");
@@ -292,7 +280,8 @@ fetch("question.json")
       option2.style.backgroundColor = "white";
       option3.style.backgroundColor = "white";
       option4.style.backgroundColor = "white";
-
+      console.log("yeesssss");
+      console.log(current);
       flag.style.backgroundColor = "rgb(187, 184, 184)";
       Flg_answer = 0;
       $(btn1).prop("disabled", false).removeClass("disabled");
