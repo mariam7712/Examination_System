@@ -1,6 +1,8 @@
 import { displaypass } from "./validations.js";
 console.log(location.href);
-
+$("#go").click(function () {
+  window.location.replace("./signup.html");
+});
 function LoginValidation() {
   const pass = displaypass("#passicon", 1);
   $("#btn2").click(async function (e) {
@@ -28,9 +30,7 @@ function LoginValidation() {
         });
         if (matchusers) {
           localStorage.setItem("firstName", matchusers.firstName);
-          history.replaceState(null, null, location.href);
           window.location.replace("../startExam/start_exam.html");
-          // window.location.href = "../startExam/start_exam.html";
         } else {
           $(".messg").show().text("Invalid email or password");
         }

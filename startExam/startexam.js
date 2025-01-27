@@ -1,4 +1,4 @@
 var start = document.getElementById("start");
 start.addEventListener("click", () => {
-  window.location.href = "../examContent/examcontent.html";
+  window.location.replace("../examContent/examcontent.html");
 });

@@ -26,7 +26,7 @@ function run_clock(id, endtime) {
     clock.innerHTML = "minutes: " + t.minutes + "  seconds: " + t.seconds;
     if (t.total <= 0) {
       clearInterval(timeinterval);
-      window.location.href = "../timeOff/time.html";
+      window.location.replace("../timeOff/time.html");
     }
   }
   update_clock(); // run function once at first to avoid delay
@@ -428,9 +428,9 @@ fetch("../database/question.json")
               finalgrade = grade * 10;
               window.localStorage.setItem("finalgrade", finalgrade.toString());
               if (finalgrade >= 60) {
-                window.location.href = "../succed/result.html";
+                window.location.replace("../succed/result.html");
               } else {
-                window.location.href = "../fail/fail.html";
+                window.location.replace("../fail/fail.html");
               }
             }
           });

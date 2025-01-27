@@ -1,5 +1,7 @@
 import * as valid from "./validations.js";
-
+$("#go").click(function () {
+  window.location.replace("./signin.html");
+});
 async function FormValidation() {
   let responsedata;
 
