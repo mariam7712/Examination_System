@@ -27,7 +27,8 @@ function LoginValidation() {
           );
         });
         if (matchusers) {
-          window.location.href = "../start_exam.html";
+          // window.location.href = "../start_exam.html";
+          window.location.replace("../start_exam.html");
         } else {
           $(".messg").show().text("Invalid email or password");
         }
