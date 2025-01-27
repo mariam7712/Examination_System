@@ -425,7 +425,20 @@ fetch("question.json")
                 }
               }
 
-              console.log("Your final grade is:", `${grade * 10}%`);
+              finalgrade = grade * 10;
+              window.localStorage.setItem("finalgrade", finalgrade.toString());
+              if (finalgrade >= 60) {
+                console.log(
+                  "congratulations you passd exam , you scored is",
+                  `${finalgrade}%`
+                );
+                window.location.href = "result.html";
+              } else {
+                console.log(
+                  `It’s okay, Ali.You scored ${finalgrade}%  . Try again for a better result!`
+                );
+                window.location.href = "fail.html";
+              }
             }
           });
         }
