@@ -101,7 +101,7 @@ fetch("question.json")
         if (!Flg_answer) {
           arr2.forEach((option) => (option.style.backgroundColor = "white"));
 
-          arr2[i].style.backgroundColor = "rgb(15, 167, 15)";
+          arr2[i].style.backgroundColor = "green";
 
           window.localStorage.setItem(
             exArray[current].question_n,
@@ -257,6 +257,27 @@ fetch("question.json")
             "</div>";
           option4.innerText = "";
           option4.appendChild(newdiv4);
+          ///////////mariomaaaaaaaaaaaaaaaa///////////////////////////
+          for (let i = 0; i < 4; i++) {
+            arr2[i].style.backgroundColor = "white";
+          }
+          for (let i = 0; i < user_answer.length; i++) {
+            if (i == current && user_answer[current]) {
+              console.log("banseh");
+              console.log(user_answer[current]);
+              for (let i = 0; i < 4; i++) {
+                if (option1.innerText == user_answer[current]) {
+                  option1.style.backgroundColor = "green";
+                } else if (option2.innerText == user_answer[current]) {
+                  option2.style.backgroundColor = "green";
+                } else if (option3.innerText == user_answer[current]) {
+                  option3.style.backgroundColor = "green";
+                } else if (option4.innerText == user_answer[current]) {
+                  option4.style.backgroundColor = "green";
+                }
+              }
+            }
+          }
         }
       });
     });
