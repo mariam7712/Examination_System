@@ -180,6 +180,91 @@ fetch("question.json")
             "</div>";
           option4.innerText = "";
           option4.appendChild(newdiv4);
+
+          // Toggle flag color based on the click count
+          flagClickCount++;
+
+          if (flagClickCount % 2 === 1) {
+            // First click
+            button.style.backgroundColor = "rgba(170, 84, 134, 1)";
+            flag.style.backgroundColor = "rgba(170, 84, 134, 1)";
+
+            button.disabled = false;
+            button.classList.remove("disabled");
+            console.log("---flagged (Gray)");
+            console.log(flagClickCount);
+
+            arr[current] = 1;
+            console.log(arr);
+          } else {
+            // Second click and alternating
+            button.style.backgroundColor = "gray";
+            flag.style.backgroundColor = "rgb(187, 184, 184)";
+            button.disabled = true;
+            button.classList.add("disabled");
+            arr[current] = 0;
+            console.log("---Unflagged (Gray)");
+            console.log(arr);
+            console.log(flagClickCount);
+          }
+        }
+      });
+    });
+
+    Array.from(buttonq).forEach((button) => {
+      button.addEventListener("click", () => {
+        current = button.innerText - 1;
+
+        flag.style.backgroundColor = "rgba(170, 84, 134, 1)";
+
+        if (arr[current] == 1) {
+          console.log(`Button ${button.innerText} clicked`);
+          qnum.innerText = `Question ${button.innerText} out of 10`;
+
+          var newdiv = document.createElement("div");
+          newdiv.innerHTML =
+            '<div class="ques_name">' + exArray[current].question_n + "</div>";
+          qc.innerText = "";
+          qc.appendChild(newdiv);
+
+          var options = [
+            exArray[current].A,
+            exArray[current].b,
+            exArray[current].c,
+            exArray[current].d,
+          ];
+          var optionElements = [option1, option2, option3, option4];
+
+          // Populate the options
+          options.forEach((optionText, index) => {
+            var newOptionDiv = document.createElement("div");
+            newOptionDiv.innerHTML = `<div class="option">${optionText}</div>`;
+            optionElements[index].innerText = ""; // Clear previous content
+            optionElements[index].appendChild(newOptionDiv);
+          });
+
+          optionElements.forEach((optionElement) => {
+            optionElement.style.backgroundColor = "white";
+          });
+
+          if (user_answer[current]) {
+            optionElements.forEach((optionElement, index) => {
+              if (
+                optionElement.innerText.trim() === user_answer[current].trim()
+              ) {
+                optionElement.style.backgroundColor = "green"; // Correct answer
+              } else {
+                optionElement.style.backgroundColor = "white"; // Incorrect answer
+              }
+            });
+          }
+          console.log(" noooooooooooooooooooooo");
+          // console.log(ques_curr);
+          // console.log(button.innerText);
+          ques_curr = button.innerText;
+          ques_curr = parseInt(ques_curr);
+
+          console.log("user_answer:", user_answer);
         }
       });
     });
@@ -526,4 +611,4 @@ fetch("question.json")
     console.error("Fetch error:", error);
   });
 //
-////////////////////////////////////////////////////////
+//////////////////////////
