@@ -11,21 +11,20 @@
         5000,
         "linear",
         function () {
-          $("#bg").fadeOut(1000, function () {
-            $(this).remove(); // Remove the #bg element after fadeOut
+          $("#bg").fadeOut(500, function () {
+            $(this).remove(); 
           });
-          $("#imgfail").fadeIn(1000, function () {
-            $("#display").fadeIn(1000, function () {
-              $("#btn1").fadeIn(1000);
-              $("#btn2").fadeIn(1000);
+          $("#imgfail").fadeIn(500, function () {
+            $("#display").fadeIn(500, function () {
+              $("#btn1").fadeIn(500);
+              $("#btn2").fadeIn(500);
             });
           });
         }
       );
-      console.log("hello");
 
 
-// /////////////////////////////////////////////
+// ///////get score //////////////////////////////////////
 const firstName = window.localStorage.getItem("firstName");
 const score = window.localStorage.getItem("finalgrade");
 const display = $("#display");
