@@ -414,13 +414,18 @@ fetch("question.json")
               console.log("Exam correct answers:", Exam_answer);
               console.log("User answers:", user_answer);
 
+              // Ensure we only compare non-null answers
               for (let i = 0; i < Exam_answer.length; i++) {
-                if (Exam_answer[i] === user_answer[i]) {
+                // Check if the user answered and the answer is correct
+                if (
+                  user_answer[i] !== null &&
+                  Exam_answer[i] === user_answer[i]
+                ) {
                   grade++;
                 }
               }
 
-              console.log("Your final grade is:", grade);
+              console.log("Your final grade is:", `${grade * 10}%`);
             }
           });
         }
@@ -611,4 +616,4 @@ fetch("question.json")
     console.error("Fetch error:", error);
   });
 //
-//////////////////////////
+////////////////////////////////////////////////////////
