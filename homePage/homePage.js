@@ -3,4 +3,5 @@ $("#btn1").click(function () {
 });
 $("#btn2").click(function () {
   window.location.replace("../SignUp/index.html");
+  localStorage.removeItem("firstName");
 });

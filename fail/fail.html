@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="bootstrap.css" />
+    <title>Document</title>
+    <style>
+      body {
+        background-color: white;
+      }
+      img {
+        width: 450px;
+        height: 450px;
+      }
+      h5 {
+        font-style: Poppins;
+      }
+      #btn1 {
+        width: 186px;
+        height: 50px;
+        border-radius: 20px;
+        background-color: rgba(170, 84, 134, 1);
+        color: white;
+        border: 1px solid white;
+      }
+
+      #btn1:hover {
+        background-color: rgb(197, 116, 163);
+      }
+      #btn2 {
+        width: 186px;
+        height: 50px;
+        border-radius: 20px;
+        background-color: white;
+        color: rgba(170, 84, 134, 1);
+        border: 1px solid rgba(170, 84, 134, 1);
+      }
+    </style>
+  </head>
+  <body class="w-100">
+    <img src="fail.png" class="mt-4 mx-auto d-block" alt="image not appear" />
+
+    <h5 class="mx-auto mt-4 text-center">
+      "It’s okay, Ali. You scored 4/10. Try again for a better result!
+    </h5>
+
+    <div class="d-flex justify-content-center mt-4">
+      <button class="mr-2" id="btn1">Return home</button>
+      <button id="btn2">Start again</button>
+    </div>
+    <script src="jquery-3.7.1.js"></script>
+    <script src="bootstrap.js"></script>
+  </body>
+</html>

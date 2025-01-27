@@ -1,6 +1,5 @@
 import { displaypass } from "./validations.js";
 
-// export const input = $("input");
 function LoginValidation() {
   const pass = displaypass("#passicon", 1);
   $("#btn2").click(async function (e) {
@@ -27,9 +26,7 @@ function LoginValidation() {
           );
         });
         if (matchusers) {
-          // window.location.href = "../start_exam.html";
-          // localStorage.setItem("firstname", matchusers.firstname);
-          localStorage.setItem("firstname", matchusers.firstName);
+          localStorage.setItem("firstName", matchusers.firstName);
           window.location.replace("../start_exam.html");
         } else {
           $(".messg").show().text("Invalid email or password");

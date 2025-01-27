@@ -119,66 +119,22 @@ export function passwordValidation() {
     return originvalue;
   };
 }
-
-// export function ConfirmPassword() {
-//   const getPassword = displaypass("#passicon2", 4);
-
-//   const password = passwordValidation();
-//   const passwordPattern =
-//     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-//   let isPasswordMatch = false;
-
-//   $(input[4]).on("blur focus", function (event) {
-//     if (event.type === "focus") {
-//       $(messg[4]).hide();
-//     } else if (event.type === "blur") {
-//       const originvalue = getPassword();
-//       console.log("Confirm Password:", originvalue);
-
-//       const passwordValue = password();
-//       console.log("Confirm Password:", originvalue);
-
-//       if (originvalue !== passwordValue) {
-//         $(messg[4]).show().text("Password does not match");
-//         isPasswordMatch = false;
-//       } else {
-//         $(messg[4]).hide();
-//         isPasswordMatch = true;
-//       }
-//       if (!passwordPattern.test(passwordValue)) {
-//         $(messg[3])
-//           .show()
-//           .text(
-//             "Password must have 8+ characters, 1 uppercase, 1 lowercase, 1 number, and 1 special character (@$!%*?&)"
-//           );
-//         isPasswordMatch = false;
-//       } else {
-//         $(messg[3]).hide();
-//         isPasswordMatch = true;
-//       }
-
-//     }
-//   });
-//   return function isPasswordMatched() {
-//     return isPasswordMatch ;
-//   };
-// }
 export function ConfirmPassword() {
   const getPassword = displaypass("#passicon2", 4);
   const password = passwordValidation();
   const passwordPattern =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
   let isPasswordMatch = false;
-  let originvalue = ""; // Declare the originvalue variable
+  let originvalue = "";
 
   $(input[4]).on("blur focus", function (event) {
     if (event.type === "focus") {
       $(messg[4]).hide();
     } else if (event.type === "blur") {
-      originvalue = getPassword(); // Get the origin password value
+      originvalue = getPassword();
       console.log("Confirm Password:", originvalue);
 
-      const passwordValue = password(); // Get the password value
+      const passwordValue = password();
       console.log("Password from validation:", passwordValue);
 
       if (originvalue !== passwordValue) {
@@ -189,7 +145,6 @@ export function ConfirmPassword() {
         isPasswordMatch = true;
       }
 
-      // Password validation pattern check
       if (!passwordPattern.test(passwordValue)) {
         $(messg[3])
           .show()
@@ -204,7 +159,6 @@ export function ConfirmPassword() {
     }
   });
 
-  // Return both the password value and match status
   return function getPasswordAndMatchStatus() {
     return {
       originvalue: originvalue,
