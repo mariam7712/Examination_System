@@ -49,12 +49,12 @@
     "right_answer": "Both b and c"
   },
   {
-    "question_n": " What is the correct syntax to write a comment in JavaScript?",
-    "A": "<!-- This is a comment -->",
-    "b": "// This is a comment",
-    "c": "/* This is a comment */",
-    "d": " Both b and c",
-    "right_answer": "Both b and c"
+    "question_n": "Which JavaScript keyword is used to declare a variable that cannot be reassigned?",
+    "A": "var",
+    "b": "let",
+    "c": "const",
+    "d": "static",
+    "right_answer": "const"
   },
   {
     "question_n": "How do you call a function named myFunction in JavaScript?",
@@ -80,7 +80,7 @@
     "d": " To round a number to the nearest integer",
     "right_answer": "To check if a value is not a number"
   },
-  
+
   {
     "question_n": "Which method is used to combine two or more arrays in JavaScript?",
     "A": "join()",
