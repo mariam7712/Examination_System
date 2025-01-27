@@ -15,7 +15,7 @@
             $(this).remove(); // Remove the #bg element after fadeOut
           });
           $("#imgfail").fadeIn(1000, function () {
-            $("#text").fadeIn(1000, function () {
+            $("#display").fadeIn(1000, function () {
               $("#btn1").fadeIn(1000);
               $("#btn2").fadeIn(1000);
             });
