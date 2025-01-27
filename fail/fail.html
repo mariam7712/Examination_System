@@ -36,17 +36,31 @@
         color: rgba(170, 84, 134, 1);
         border: 1px solid rgba(170, 84, 134, 1);
       }
+         #imgfail {
+        margin-top: 100px;
+      }
+      #bg {
+        width: 0;
+        height: 8px;
+        background-color: rgba(170, 82, 134, 1);
+      }
     </style>
   </head>
   <body class="w-100">
-    <img src="fail.png" class="mt-4 mx-auto d-block" alt="image not appear" />
-
-    <h5 class="mx-auto mt-4 text-center" id="display"></h5>
+   <div id="bg"></div>
+    <br />
+    <div id="imgfail">
+      <img src="fail.png" class="mx-auto d-block" alt="image not appear" />
+    </div>
+    <h5 class="mx-auto mt-4 text-center" id="display">
+      "It’s okay, Ali. You scored Try again for a better result!
+    </h5>
 
     <div class="d-flex justify-content-center mt-4">
       <button class="mr-2" id="btn1">Return home</button>
       <button id="btn2">Start again</button>
     </div>
+    
     <script src="../jquery-3.7.1.js"></script>
     <script src="../bootstrap.js"></script>
     <script src="fail.js"></script>
