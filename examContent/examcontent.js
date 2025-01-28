@@ -1,5 +1,5 @@
 /////////////////////////////////30 second from now//////////////////////////////////////////////////////////////
-var time_in_minutes = .5;
+var time_in_minutes = 0.5;
 var current_time = Date.parse(new Date());
 var deadline = new Date(current_time + time_in_minutes * 60 * 1000);
 
@@ -242,7 +242,7 @@ fetch("../database/question.json")
           btn2.text("Finish Exam");
           btn2.on("click", () => {
             let grade = 0;
-            if (current === exArray.length) {
+            if (current + 1 === exArray.length) {
               for (let i = 0; i < Exam_answer.length; i++) {
                 if (
                   user_answer[i] !== null &&
