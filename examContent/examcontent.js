@@ -1,5 +1,5 @@
-/////////////////// 10 second from now
-var time_in_minutes = 0.5;
+/////////////////////////////////30 second from now//////////////////////////////////////////////////////////////
+var time_in_minutes = .5;
 var current_time = Date.parse(new Date());
 var deadline = new Date(current_time + time_in_minutes * 60 * 1000);
 
@@ -17,7 +17,6 @@ function time_remaining(endtime) {
     seconds: seconds,
   };
 }
-
 function run_clock(id, endtime) {
   let clock = document.getElementById(id);
   function update_clock() {
@@ -46,7 +45,6 @@ const option2 = $("#option2");
 const option3 = $("#option3");
 const option4 = $("#option4");
 $(".buttonq").prop("disabled", true).addClass("disabled");
-
 let answer;
 let Flg_answer = 0;
 btn1.prop("disabled", true).addClass("disabled");
@@ -64,6 +62,7 @@ fetch("../database/question.json")
       ex.add(data[index]);
     } while (ex.size < 10);
     const exArray = Array.from(ex);
+    console.log(exArray);
     qc.text(exArray[0].question_n);
     option1.text(exArray[0].A);
     option2.text(exArray[0].b);
@@ -71,21 +70,20 @@ fetch("../database/question.json")
     option4.text(exArray[0].d);
 
     var arr2 = [option1, option2, option3, option4];
+    ///////////////////correct answers///////////////////////////
     let Exam_answer = new Array(10);
     for (let i = 0; i < 10; i++) {
-      ///////////////////correct answers///////////////////////////
       Exam_answer[i] = exArray[i].right_answer;
     }
 
     let user_answer = new Array(exArray.length).fill(null);
+    let current = 0;
 
     for (let i = 0; i < 4; i++) {
       arr2[i].on("click", () => {
         if (!Flg_answer) {
           arr2.forEach((option) => option.css("backgroundColor", "white"));
-
           arr2[i].css("backgroundColor", "rgb(187, 184, 184)");
-          arr2[i].css("border", "1px solid black");
 
           window.localStorage.setItem(
             exArray[current].question_n,
@@ -104,65 +102,47 @@ fetch("../database/question.json")
       });
     }
 
-    ///////////////////////////////////////////////////////////////////
-    let current = 0;
     let ques_curr = 1;
     let arr = new Array(10).fill(0);
     run_clock("clockdiv", deadline);
     let flagClickCount = 0;
+    ///////////////////////////////////change question///////////////////////////////////
+    function change_ques(index) {
+      if (index < 0 || index >= exArray.length) return;
 
+      arr2 = [option1, option2, option3, option4];
+      qnum.text(`Question ${index + 1} out of 10`);
+
+      const questionText = exArray[index].question_n;
+      qc.empty().append(`<div class="ques_name">${questionText}</div>`);
+
+      const optionsText = [
+        exArray[index].A,
+        exArray[index].b,
+        exArray[index].c,
+        exArray[index].d,
+      ];
+
+      arr2.forEach((Element, i) => {
+        Element.empty().append(`<div class="option">${optionsText[i]}</div>`);
+      });
+    }
+    ////////////////////////////FLAGGING///////////////////////////////
     flag.on("click", () => {
       console.log(qc.text());
       Array.from(buttonq).forEach((button) => {
         let buttonText = parseInt($(button).text());
+        if (current < 0) current = 0;
+        if (current >= exArray.length) current = exArray.length - 1;
         if (current + 1 === buttonText) {
-          qnum.text(`Question ${buttonText} out of 10`);
-          var newdiv = $("<div></div>");
-          newdiv.html(
-            '<div class="ques_name">' +
-              exArray[buttonText - 1].question_n +
-              "</div>"
-          );
-          qc.empty();
-          qc.append(newdiv);
-
-          var newdiv1 = $("<div></div>");
-          newdiv1.html(
-            '<div class="option1">' + exArray[buttonText - 1].A + "</div>"
-          );
-          option1.empty();
-          option1.append(newdiv1);
-
-          var newdiv2 = $("<div></div>");
-          newdiv2.html(
-            '<div class="option2">' + exArray[buttonText - 1].b + "</div>"
-          );
-          option2.empty();
-          option2.append(newdiv2);
-
-          var newdiv3 = $("<div></div>");
-          newdiv3.html(
-            '<div class="option3">' + exArray[buttonText - 1].c + "</div>"
-          );
-          option3.empty();
-          option3.append(newdiv3);
-
-          var newdiv4 = $("<div></div>");
-          newdiv4.html(
-            '<div class="option4">' + exArray[buttonText - 1].d + "</div>"
-          );
-          option4.empty();
-          option4.append(newdiv4);
+          change_ques(current);
           flagClickCount++;
           if (flagClickCount % 2 === 1) {
             $(button).css("backgroundColor", "rgba(170, 84, 134, 1)");
             flag.css("backgroundColor", "rgba(170, 84, 134, 1)");
-
             $(button).prop("disabled", false);
             $(button).removeClass("disabled");
             console.log("---flagged (Gray)");
-            console.log(flagClickCount);
-
             arr[current] = 1;
             console.log(arr);
           } else {
@@ -173,7 +153,6 @@ fetch("../database/question.json")
             arr[current] = 0;
             console.log("---Unflagged (Gray)");
             console.log(arr);
-            console.log(flagClickCount);
           }
         }
       });
@@ -184,38 +163,13 @@ fetch("../database/question.json")
         let buttonText = parseInt($(button).text());
         current = buttonText - 1;
         flag.css("backgroundColor", "rgba(170, 84, 134, 1)");
-
         if (arr[current] == 1) {
-          console.log(`Button ${buttonText} clicked`);
-          qnum.text(`Question ${buttonText} out of 10`);
-
-          var newdiv = $("<div></div>");
-
-          newdiv.html(
-            '<div class="ques_name">' + exArray[current].question_n + "</div>"
-          );
-          qc.empty();
-          qc.append(newdiv);
-
-          var options = [
-            exArray[current].A,
-            exArray[current].b,
-            exArray[current].c,
-            exArray[current].d,
-          ];
-          var optionElements = [option1, option2, option3, option4];
-
-          options.forEach((optionText, index) => {
-            var newOptionDiv = $("<div></div>");
-            newOptionDiv.html(`<div class="option">${optionText}</div>`);
-            optionElements[index].empty();
-            optionElements[index].append(newOptionDiv);
-          });
-
+          console.log(`Button ${current + 1} clicked`);
+          change_ques(current);
+          optionElements = [option1, option2, option3, option4];
           optionElements.forEach((optionElement) => {
             optionElement.css("backgroundColor", "white");
           });
-
           if (user_answer[current]) {
             optionElements.forEach((optionElement, index) => {
               if (optionElement.text().trim() === user_answer[current].trim()) {
@@ -237,12 +191,10 @@ fetch("../database/question.json")
     const buttonsDiv = $("#buttons");
     const allButtons = buttonsDiv.find("button");
     btn2 = $("#btn2");
-
     btn2.on("click", () => {
-      option1.css("backgroundColor", "white");
-      option2.css("backgroundColor", "white");
-      option3.css("backgroundColor", "white");
-      option4.css("backgroundColor", "white");
+      arr2.forEach((element) => {
+        element.css("backgroundColor", "white");
+      });
       flag.css("backgroundColor", "rgb(187, 184, 184)");
       Flg_answer = 0;
       btn1.prop("disabled", false).removeClass("disabled");
@@ -256,53 +208,19 @@ fetch("../database/question.json")
           flag.css("backgroundColor", "rgba(170, 84, 134, 1)");
         }
       }
+      /////////////////////////////////NEXT BUTTON///////////////////////////////////
 
       if (current <= 9) {
+        console.log(current);
         qnum.empty();
         if (ques_curr < 9) {
           ques_curr = ques_curr + 1;
           qnum.text(` Question ${ques_curr} out of 10`);
         }
-
         console.log("Data fetched:", exArray[current]);
         if (current <= 8 && current != 9) {
-          var newdiv = $("<div></div>");
-          newdiv.html(
-            '<div class="ques_name">' +
-              exArray[current + 1].question_n +
-              "</div>"
-          );
-          qc.empty();
-          qc.append(newdiv);
-
-          var newdiv1 = $("<div></div>");
-          newdiv1.html(
-            '<div class="option1">' + exArray[current + 1].A + "</div>"
-          );
-          option1.empty();
-          option1.append(newdiv1);
-
-          var newdiv2 = $("<div></div>");
-          newdiv2.html(
-            '<div class="option2">' + exArray[current + 1].b + "</div>"
-          );
-          option2.empty();
-          option2.append(newdiv2);
-
-          var newdiv3 = $("<div></div>");
-          newdiv3.html(
-            '<div class="option3">' + exArray[current + 1].c + "</div>"
-          );
-          option3.empty();
-          option3.append(newdiv3);
-
-          var newdiv4 = $("<div></div>");
-          newdiv4.html(
-            '<div class="option4">' + exArray[current + 1].d + "</div>"
-          );
-          option4.empty();
-          option4.append(newdiv4);
-          current++;
+          change_ques(++current);
+          console.log(current);
           for (let i = 0; i < user_answer.length; i++) {
             if (i == current && user_answer[current]) {
               for (let i = 0; i < 4; i++) {
@@ -320,40 +238,11 @@ fetch("../database/question.json")
           }
         }
         if (current == 9) {
-          qnum.text(` Question ${current + 1} out of 10`);
-
-          var newdiv = $("<div></div>");
-          newdiv.html(
-            '<div class="ques_name">' + exArray[current].question_n + "</div>"
-          );
-          qc.empty();
-          qc.append(newdiv);
-
-          var newdiv1 = $("<div></div>");
-          newdiv1.html('<div class="option1">' + exArray[current].A + "</div>");
-          option1.empty();
-          option1.append(newdiv1);
-
-          var newdiv2 = $("<div></div>");
-          newdiv2.html('<div class="option2">' + exArray[current].b + "</div>");
-          option2.empty();
-          option2.append(newdiv2);
-
-          var newdiv3 = $("<div></div>");
-          newdiv3.html('<div class="option3">' + exArray[current].c + "</div>");
-          option3.empty();
-          option3.append(newdiv3);
-
-          var newdiv4 = $("<div></div>");
-          newdiv4.html('<div class="option4">' + exArray[current].d + "</div>");
-          option4.empty();
-          option4.append(newdiv4);
-
+          change_ques(current);
           btn2.text("Finish Exam");
-
           btn2.on("click", () => {
             let grade = 0;
-            if (current + 1 === exArray.length) {
+            if (current === exArray.length) {
               for (let i = 0; i < Exam_answer.length; i++) {
                 if (
                   user_answer[i] !== null &&
@@ -363,6 +252,7 @@ fetch("../database/question.json")
                 }
               }
               finalgrade = grade * 10;
+              console.log(finalgrade);
               window.localStorage.setItem("finalgrade", finalgrade.toString());
               if (finalgrade >= 60) {
                 window.location.replace("../succed/result.html");
@@ -372,6 +262,7 @@ fetch("../database/question.json")
             }
           });
         }
+        ////////////////////////////////////////////////////////////
       }
       let flagClickCountnext = 0;
       flag.on("click", () => {
@@ -380,19 +271,17 @@ fetch("../database/question.json")
           buttonText = parseInt($(button).text());
 
           if (current + 1 == buttonText) {
+            console.log(buttonText);
             console.log(`Buttonxxxx ${buttonText} clicked`);
             console.log(flagClickCountnext);
             flagClickCountnext++;
-
+            console.log(flagClickCountnext);
             if (flagClickCountnext % 2 === 1) {
               $(button).css("backgroundColor", "rgba(170, 84, 134, 1)");
               flag.css("backgroundColor", "rgba(170, 84, 134, 1)");
-
               $(button).prop("disabled", false);
               $(button).removeClass("disabled");
-
               arr[current] = 1;
-              console.log(arr);
             } else {
               $(button).css("backgroundColor", "gray");
               flag.css("backgroundColor", "rgb(187, 184, 184)");
@@ -414,13 +303,10 @@ fetch("../database/question.json")
           $(btn1).prop("disabled", true).addClass("disabled");
         }
       }
-
-      option1.css("background-color", "white");
-      option2.css("background-color", "white");
-      option3.css("background-color", "white");
-      option4.css("background-color", "white");
+      arr2.forEach((element) => {
+        element.css("background-color", "white");
+      });
       Flg_answer = 0;
-
       flag.css("background-color", "rgb(187, 184, 184)");
       flagg.css("color", "rgb(255, 255, 255)");
 
@@ -437,63 +323,27 @@ fetch("../database/question.json")
       btn2.text("NEXT");
       if (current > 0) {
         console.log(`Button ${current - 1}:`, allButtons[current - 1]);
-
         let qnum = $("#qnum");
         qnum.text("");
-
-        if (ques_curr > 1 && current <= 10) {
-          ques_curr = ques_curr - 1;
+        if (ques_curr > 1 && current < 9) {
+          ques_curr -= 1;
           qnum.text(`Question ${ques_curr} out of 10`);
-          console.log("Data fetched:", exArray[current]);
-          console.log(",,,," + (current - 1));
-          console.log(exArray[current - 1].question_n);
 
-          var newdiv = $("<div>")
-            .addClass("ques_name")
-            .html(exArray[current - 1].question_n);
-          qc.text("");
-          qc.append(newdiv);
-
-          var newdiv1 = $("<div>")
-            .addClass("option1")
-            .html(exArray[current - 1].A);
-          option1.text("");
-          option1.append(newdiv1);
-
-          var newdiv2 = $("<div>")
-            .addClass("option2")
-            .html(exArray[current - 1].b);
-          option2.text("");
-          option2.append(newdiv2);
-
-          var newdiv3 = $("<div>")
-            .addClass("option3")
-            .html(exArray[current - 1].c);
-          option3.text("");
-          option3.append(newdiv3);
-
-          var newdiv4 = $("<div>")
-            .addClass("option4")
-            .html(exArray[current - 1].d);
-          option4.text("");
-          option4.append(newdiv4);
-
-          current = current - 1;
+          current -= 1;
+          change_ques(current);
 
           $.each(user_answer, function (i) {
-            if (i == current && user_answer[current]) {
-              console.log("banseh");
+            if (i === current && user_answer[current]) {
               console.log(user_answer[current]);
-              for (let i = 0; i < 4; i++) {
-                if (option1.text() == user_answer[current]) {
-                  option1.css("background-color", "rgb(187, 184, 184)");
-                } else if (option2.text() == user_answer[current]) {
-                  option2.css("background-color", "rgb(187, 184, 184)");
-                } else if (option3.text() == user_answer[current]) {
-                  option3.css("background-color", "rgb(187, 184, 184)");
-                } else if (option4.text() == user_answer[current]) {
-                  option4.css("background-color", "rgb(187, 184, 184)");
-                }
+
+              if (option1.text() === user_answer[current]) {
+                option1.css("background-color", "rgb(187, 184, 184)");
+              } else if (option2.text() === user_answer[current]) {
+                option2.css("background-color", "rgb(187, 184, 184)");
+              } else if (option3.text() === user_answer[current]) {
+                option3.css("background-color", "rgb(187, 184, 184)");
+              } else if (option4.text() === user_answer[current]) {
+                option4.css("background-color", "rgb(187, 184, 184)");
               }
             }
           });
@@ -503,7 +353,7 @@ fetch("../database/question.json")
             console.log(qc.text());
             $.each(buttonq, function () {
               if (current + 1 == $(this).text()) {
-                console.log(`Buttonxxxx ${$(this).text()} clicked`);
+                console.log(`Button ${$(this).text()} clicked`);
                 console.log(flagClickCountprevious);
                 flagClickCountprevious++;
 
@@ -512,19 +362,69 @@ fetch("../database/question.json")
                   flag.css("background-color", "rgba(170, 84, 134, 1)");
 
                   $(this).prop("disabled", false).removeClass("disabled");
-                  console.log("---flagged (Gray)");
-                  console.log(flagClickCountprevious);
-
+                  console.log("---flagged (Purple)");
                   arr[current] = 1;
                   console.log(arr);
                 } else {
                   $(this).css("background-color", "gray");
                   flag.css("background-color", "rgb(187, 184, 184)");
                   $(this).prop("disabled", true).addClass("disabled");
-                  arr[current] = 0;
                   console.log("---Unflagged (Gray)");
+                  arr[current] = 0;
                   console.log(arr);
-                  console.log(flagClickCountprevious);
+                }
+              }
+            });
+          });
+        } else {
+          console.log("ques_curr");
+          console.log(ques_curr);
+
+          qnum.text(`Question ${ques_curr} out of 10`);
+
+          current -= 1;
+          change_ques(current);
+
+          $.each(user_answer, function (i) {
+            if (i === current && user_answer[current]) {
+              console.log(user_answer[current]);
+
+              if (option1.text() === user_answer[current]) {
+                option1.css("background-color", "rgb(187, 184, 184)");
+              } else if (option2.text() === user_answer[current]) {
+                option2.css("background-color", "rgb(187, 184, 184)");
+              } else if (option3.text() === user_answer[current]) {
+                option3.css("background-color", "rgb(187, 184, 184)");
+              } else if (option4.text() === user_answer[current]) {
+                option4.css("background-color", "rgb(187, 184, 184)");
+              }
+            }
+          });
+
+          let flagClickCountprevious = 0;
+          flag.click(function () {
+            console.log(qc.text());
+            $.each(buttonq, function () {
+              if (current + 1 == $(this).text()) {
+                console.log(`Button ${$(this).text()} clicked`);
+                console.log(flagClickCountprevious);
+                flagClickCountprevious++;
+
+                if (flagClickCountprevious % 2 === 1) {
+                  $(this).css("background-color", "rgba(170, 84, 134, 1)");
+                  flag.css("background-color", "rgba(170, 84, 134, 1)");
+
+                  $(this).prop("disabled", false).removeClass("disabled");
+                  console.log("---flagged (Purple)");
+                  arr[current] = 1;
+                  console.log(arr);
+                } else {
+                  $(this).css("background-color", "gray");
+                  flag.css("background-color", "rgb(187, 184, 184)");
+                  $(this).prop("disabled", true).addClass("disabled");
+                  console.log("---Unflagged (Gray)");
+                  arr[current] = 0;
+                  console.log(arr);
                 }
               }
             });
