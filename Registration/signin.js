@@ -35,10 +35,10 @@ function LoginValidation() {
           $(".messg").show().text("Invalid email or password");
         }
       } else {
-        console.error("Error: Failed to fetch. Status:", response.status);
+        alert("Error: Failed to fetch. Status:", response.status);
       }
     } catch (error) {
-      console.error("Fetch error:", error);
+      alert("Fetch error:", error);
     }
   });
 }

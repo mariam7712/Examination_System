@@ -18,7 +18,7 @@ async function FormValidation() {
       console.log("Fetched user data:", responsedata);
     }
   } catch (error) {
-    console.error("Error fetching user data:", error);
+    alert("Error fetching user data:", error);
   }
 
   let isValid = true;
@@ -32,7 +32,6 @@ async function FormValidation() {
   $("#btn").on("click", async function (e) {
     e.preventDefault();
     e.stopPropagation();
-    console.log("Form submission prevented. Starting validation.");
 
     isValid = true;
 
@@ -84,11 +83,8 @@ async function FormValidation() {
     }
 
     if (!isValid) {
-      console.log("Validation failed, form not submitted.");
       return false;
     }
-
-    console.log("Validation passed. Preparing to send data...");
 
     const passwordvalue = confirmPassword().originvalue;
 
@@ -99,8 +95,6 @@ async function FormValidation() {
       password: passwordvalue,
     };
     localStorage.setItem("firstName", userData.firstName);
-
-    console.log("User data prepared for sending:", userData);
 
     try {
       const response = await fetch("http://localhost:3000/user", {
@@ -118,12 +112,11 @@ async function FormValidation() {
         setTimeout(() => {
           window.location.replace("../startExam/start_exam.html");
         }, 100);
-        // return true;
       } else {
-        console.error("Failed to send data. Response status:", response.status);
+        alert("Failed to send data. Response status:", response.status);
       }
     } catch (error) {
-      console.error("Error while sending data:", error);
+      alert("Error while sending data:", error);
     }
   });
 }
