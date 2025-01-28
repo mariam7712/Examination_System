@@ -31,6 +31,7 @@ async function FormValidation() {
 
   $("#btn").on("click", async function (e) {
     e.preventDefault();
+    e.stopPropagation();
     console.log("Form submission prevented. Starting validation.");
 
     isValid = true;
@@ -112,30 +113,12 @@ async function FormValidation() {
 
       if (response.ok) {
         const data = await response.json();
-        console.log("Data successfully sent. Server response:", data);
-        console.log("Attempting redirection...");
+        console.log("Successfully registered user, redirecting...");
 
-        try {
-          window.location.href = "../startExam/start_exam.html";
-
-          setTimeout(() => {
-            if (window.location.href.indexOf("start_exam.html") === -1) {
-              window.location.replace("../startExam/start_exam.html");
-            }
-          }, 100);
-          setTimeout(() => {
-            if (window.location.href.indexOf("start_exam.html") === -1) {
-              console.log("Trying alternative redirection method...");
-              window.location.replace("../startExam/start_exam.html");
-            }
-          }, 200);
-        } catch (redirectError) {
-          console.error("Redirection error:", redirectError);
-          const link = document.createElement("a");
-          link.href = "../startExam/start_exam.html";
-          document.body.appendChild(link);
-          link.click();
-        }
+        setTimeout(() => {
+          window.location.replace("../startExam/start_exam.html");
+        }, 100);
+        // return true;
       } else {
         console.error("Failed to send data. Response status:", response.status);
       }

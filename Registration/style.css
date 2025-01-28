@@ -44,7 +44,7 @@ img {
 .signup {
   font-size: 32px;
   font-weight: 550;
-  margin-bottom: 20px;
+  margin-bottom: 20px !important;
 }
 form {
   width: 100%;
