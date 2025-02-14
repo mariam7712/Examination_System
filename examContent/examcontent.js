@@ -76,7 +76,6 @@ fetch("../database/question.json")
     option4.text(exArray[0].d);
 
     var arr2 = [option1, option2, option3, option4];
-    ///////////////////correct answers///////////////////////////
     ///////////////////correct answers///////////////////////////////////////////////////////////
     let Exam_answer = new Array(10);
     for (let i = 0; i < 10; i++) {
@@ -85,7 +84,6 @@ fetch("../database/question.json")
     /////////////////////////////array of user answer :) &&  Local Storage :) ////////////////////////////////////////////////
     let user_answer = new Array(exArray.length).fill(null);
     let current = 0;
-    let amr = 0;
     let choose_answer = new Array(exArray.length).fill(0);
 
     for (let i = 0; i < 4; i++) {
@@ -268,27 +266,6 @@ fetch("../database/question.json")
               }
             }
           }
-
-          //  $.each(user_answer, function (i) {
-          //    if (i === current && user_answer[current]) {
-          //      console.log(user_answer[current]);
-          //      console.log("%%%%%%%%%%%%%%%%%");
-          //      if (option1.text() === user_answer[current]) {
-          //        option1.css("background-color", "rgb(187, 184, 184)");
-          //        option1.addClass("clicked");
-          //        console.log(option1);
-          //      } else if (option2.text() === user_answer[current]) {
-          //        option2.css("background-color", "rgb(187, 184, 184)");
-          //        option2.addClass("clicked");
-          //      } else if (option3.text() === user_answer[current]) {
-          //        option3.css("background-color", "rgb(187, 184, 184)");
-          //        option3.addClass("clicked");
-          //      } else if (option4.text() === user_answer[current]) {
-          //        option4.css("background-color", "rgb(187, 184, 184)");
-          //        option4.addClass("clicked");
-          //      }
-          //    }
-          //  });
         }
         ////////////////////////////////////////////////////////////
         if (btn2.text() == "Finish Exam") {
@@ -324,7 +301,6 @@ fetch("../database/question.json")
           btn2.text("Finish Exam");
         }
       }
-      ///////////////uselessssssss////////////////////////////////////////////\
       /************************************************************* */
       let flagClickCountnext = 0;
       flag.on("click", () => {
@@ -354,7 +330,6 @@ fetch("../database/question.json")
           }
         });
       });
-      /************************************************************************ */
     });
 
     //////////////////////////////previous button//////////////////////////////////
@@ -421,7 +396,6 @@ fetch("../database/question.json")
               }
             }
           });
-          /*********************************uselesssssssssss */
           let flagClickCountprevious = 0;
           flag.click(function () {
             console.log(qc.text());
@@ -450,8 +424,6 @@ fetch("../database/question.json")
               }
             });
           });
-          // white
-          //********************************************************uselesssssss */
         } else {
           console.log("ques_curr");
           console.log(ques_curr);
@@ -476,35 +448,6 @@ fetch("../database/question.json")
               }
             }
           });
-
-          // let flagClickCountprevious = 0;
-          // flag.click(function () {
-          //   console.log(qc.text());
-          //   $.each(buttonq, function () {
-          //     if (current + 1 == $(this).text()) {
-          //       console.log(`Button ${$(this).text()} clicked`);
-          //       console.log(flagClickCountprevious);
-          //       flagClickCountprevious++;
-
-          //       if (flagClickCountprevious % 2 === 1) {
-          //         $(this).css("background-color", "rgba(170, 84, 134, 1)");
-          //         flag.css("background-color", "rgba(170, 84, 134, 1)");
-
-          //         $(this).prop("disabled", false).removeClass("disabled");
-          //         console.log("---flagged (Purple)");
-          //         arr[current] = 1;
-          //         console.log(arr);
-          //       } else {
-          //         $(this).css("background-color", "gray");
-          //         flag.css("background-color", "rgb(187, 184, 184)");
-          //         $(this).prop("disabled", true).addClass("disabled");
-          //         console.log("---Unflagged (Gray)");
-          //         arr[current] = 0;
-          //         console.log(arr);
-          //       }
-          //     }
-          //   });
-          // });
         }
       }
       console.log("please print currentttt when pre after finshhhh");
