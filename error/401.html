@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../bootstrap.css" />
+    <title>Document</title>
+    <style>
+      body {
+        background-color: white;
+      }
+      img {
+        width: 450px;
+        height: 450px;
+      }
+      h5 {
+        font-style: Poppins;
+      }
+      button {
+        width: 186px;
+        height: 50px;
+        border-radius: 20px;
+        background-color: rgba(170, 84, 134, 1);
+        color: white;
+        border: none;
+      }
+
+      button:hover {
+        background-color: rgb(197, 116, 163);
+      }
+      #imgsucced {
+        margin-top: 100px;
+      }
+      #bg {
+        width: 0;
+        height: 8px;
+        background-color: rgba(170, 82, 134, 1);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="bg"></div>
+    <div id="imgsucced">
+      <img
+        src="../photos/401 Error Unauthorized-amico.svg"
+        class="mt-4 mx-auto d-block"
+        alt="image not appear"
+      />
+    </div>
+    <h5 class="mx-auto mt-4 text-center" id="display"></h5>
+    <div class="d-flex justify-content-center mt-4">
+      <button class="mr-2" id="btn1">SignIn</button>
+    </div>
+    <script src="../jquery-3.7.1.js"></script>
+    <script src="../bootstrap.js"></script>
+    <script>
+      $("#btn1").click(function () {
+        window.location.replace("../Registration/signin.html");
+      });
+    </script>
+  </body>
+</html>

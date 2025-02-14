@@ -44,6 +44,10 @@ const option1 = $("#option1");
 const option2 = $("#option2");
 const option3 = $("#option3");
 const option4 = $("#option4");
+const loading = $("#loading");
+loading.css("display", "block");
+const content = $("#conent");
+content.css("display", "none");
 $(".buttonq").prop("disabled", true).addClass("disabled");
 let answer;
 let Flg_answer = 0;
@@ -52,11 +56,14 @@ let ex = new Set();
 fetch("../database/question.json")
   .then((response) => {
     if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+      // throw new Error(`HTTP error! Status: ${response.status}`);
+      window.location.replace("../error/404.html");
     }
     return response.json();
   })
   .then((data) => {
+    loading.css("display", "none");
+    content.css("display", "block");
     do {
       let index = Math.floor(Math.random() * data.length);
       ex.add(data[index]);

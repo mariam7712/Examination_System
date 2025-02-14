@@ -38,7 +38,7 @@ function LoginValidation() {
         alert("Error: Failed to fetch. Status:", response.status);
       }
     } catch (error) {
-      alert("Fetch error:", error);
+      window.location.replace("../error/401.html");
     }
   });
 }
