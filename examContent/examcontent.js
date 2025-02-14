@@ -1,5 +1,5 @@
 /////////////////////////////////30 second from now//////////////////////////////////////////////////////////////
-var time_in_minutes = 0.5;
+var time_in_minutes = .5;
 var current_time = Date.parse(new Date());
 var deadline = new Date(current_time + time_in_minutes * 60 * 1000);
 
@@ -76,6 +76,7 @@ fetch("../database/question.json")
     option4.text(exArray[0].d);
 
     var arr2 = [option1, option2, option3, option4];
+    ///////////////////correct answers///////////////////////////
     ///////////////////correct answers///////////////////////////////////////////////////////////
     let Exam_answer = new Array(10);
     for (let i = 0; i < 10; i++) {
@@ -84,6 +85,7 @@ fetch("../database/question.json")
     /////////////////////////////array of user answer :) &&  Local Storage :) ////////////////////////////////////////////////
     let user_answer = new Array(exArray.length).fill(null);
     let current = 0;
+    let amr = 0;
     let choose_answer = new Array(exArray.length).fill(0);
 
     for (let i = 0; i < 4; i++) {
@@ -163,10 +165,12 @@ fetch("../database/question.json")
             arr[current] = 1;
             console.log(arr);
           } else {
-            $(button).css("backgroundColor", "rgb(187, 184, 184)");
-            flag.css("backgroundColor", "rgb(187, 184, 184)");
             $(button).prop("disabled", true);
+            $(button).css("backgroundColor", "rgb(187, 184, 184)");
+
             $(button).addClass("disabled");
+            flag.css("backgroundColor", "rgb(187, 184, 184)");
+
             arr[current] = 0;
             console.log("---Unflagged (Gray)");
             console.log(arr);
@@ -301,6 +305,7 @@ fetch("../database/question.json")
           btn2.text("Finish Exam");
         }
       }
+      ///////////////uselessssssss////////////////////////////////////////////\
       /************************************************************* */
       let flagClickCountnext = 0;
       flag.on("click", () => {
@@ -321,7 +326,7 @@ fetch("../database/question.json")
               $(button).removeClass("disabled");
               arr[current] = 1;
             } else {
-              $(button).css("backgroundColor", "gray");
+              $(button).css("backgroundColor", "rgb(187, 184, 184)");
               flag.css("backgroundColor", "rgb(187, 184, 184)");
               $(button).prop("disabled", true);
               $(button).addClass("disabled");
@@ -414,7 +419,7 @@ fetch("../database/question.json")
                   arr[current] = 1;
                   console.log(arr);
                 } else {
-                  $(this).css("background-color", "gray");
+                  $(this).css("background-color", "rgb(187, 184, 184)");
                   flag.css("background-color", "rgb(187, 184, 184)");
                   $(this).prop("disabled", true).addClass("disabled");
                   console.log("---Unflagged (Gray)");
@@ -448,6 +453,35 @@ fetch("../database/question.json")
               }
             }
           });
+
+          // let flagClickCountprevious = 0;
+          // flag.click(function () {
+          //   console.log(qc.text());
+          //   $.each(buttonq, function () {
+          //     if (current + 1 == $(this).text()) {
+          //       console.log(`Button ${$(this).text()} clicked`);
+          //       console.log(flagClickCountprevious);
+          //       flagClickCountprevious++;
+
+          //       if (flagClickCountprevious % 2 === 1) {
+          //         $(this).css("background-color", "rgba(170, 84, 134, 1)");
+          //         flag.css("background-color", "rgba(170, 84, 134, 1)");
+
+          //         $(this).prop("disabled", false).removeClass("disabled");
+          //         console.log("---flagged (Purple)");
+          //         arr[current] = 1;
+          //         console.log(arr);
+          //       } else {
+          //         $(this).css("background-color", "gray");
+          //         flag.css("background-color", "rgb(187, 184, 184)");
+          //         $(this).prop("disabled", true).addClass("disabled");
+          //         console.log("---Unflagged (Gray)");
+          //         arr[current] = 0;
+          //         console.log(arr);
+          //       }
+          //     }
+          //   });
+          // });
         }
       }
       console.log("please print currentttt when pre after finshhhh");
